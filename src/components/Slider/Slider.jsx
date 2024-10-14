@@ -1,9 +1,21 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { nextSlide, prevSlide, dotSlide } from '../../features/Slice/SliderSlice'
 import { useSelector, useDispatch } from "react-redux"
-import { sliderData } from '../../assets/data/dummyData';
+import axios from 'axios';
+// import { sliderData } from '../../assets/data/dummyData';
 
 export default function Slider() {
+  const [sliderData, setSliderData] = useState([]);
+  useEffect(() => {
+      // Fetch data from backend API
+      axios.get('/api/sliderData')
+          .then(response => {
+              setSliderData(response.data);  // Update state with the fetched data
+          })
+          .catch(error => {
+            console.log(error)
+          });
+  }, []);
   const SlideIndex = useSelector((state) => state.slider.value);
   console.log("SliderIndex", SlideIndex);
   const dispatch = useDispatch();
@@ -13,11 +25,12 @@ export default function Slider() {
       <div>
         {
           sliderData.map((item) => {
+
             return (
               <div key={item.id} className={parseInt(item.id) === SlideIndex ? "opacity-100 duration-700 ease-in-out scale-100" : "opacity-0 duration-700 ease-in-out scale-95"}>
                 <div>
                   {parseInt(item.id) === SlideIndex && (
-                    <img className='h-[850px] w-full' src={item.img} alt="shoes" />
+                    <img className='h-[850px] w-full' src={`http://localhost:3000/${item.img}`} alt="shoes" />
                   )}
                 </div>
                 <div className='absolute top-40 mx-auto inset-x-1/4'>

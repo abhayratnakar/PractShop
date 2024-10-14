@@ -5,11 +5,11 @@ import { addToCart } from '../../features/Slice/CartSlice';
 
 
 function ProductSectionItem({ id, img, name, text, size, price, color, totalPrice }) {
-
+    // alert(img)
+    const newimg = "http://localhost:3000"+img;
     const dispatch = useDispatch();
     const defaultSize = size[0];
     const defaultColor = color[0];
-
     return (
         <div>
             <Card className="w-96">
@@ -20,7 +20,7 @@ function ProductSectionItem({ id, img, name, text, size, price, color, totalPric
                     SALE%
                 </Typography>
                 <CardHeader floated={false} className="h-96">
-                    <img src={img} alt={name} />
+                    <img src={newimg} alt={name} />
                 </CardHeader>
                 <CardBody className="text-center">
                     <Typography variant="h4" color="blue-gray" className="mb-2">
@@ -50,7 +50,7 @@ function ProductSectionItem({ id, img, name, text, size, price, color, totalPric
                         <Button
                             onClick={() => dispatch(addToCart({
                                 id: id,
-                                img: img,
+                                img: newimg,
                                 text: text,
                                 amount: 1,
                                 price: price,

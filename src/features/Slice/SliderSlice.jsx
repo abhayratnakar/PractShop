@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createSlice } from "@reduxjs/toolkit";
 import { sliderData } from "../../assets/data/dummyData";
 

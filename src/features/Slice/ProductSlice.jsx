@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createSlice } from "@reduxjs/toolkit";
 import {storeData} from "../../assets/data/dummyData"
 
@@ -51,7 +52,7 @@ export const ProductSlice = createSlice({
                 return error;
             }
         },
-        sortByPrice(state, action){
+        sortByPrice(state){
             try {
                 const price = state.filteredProduct.sort((a, b) =>
                   a.price > b.price ? -1 : 1
